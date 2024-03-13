@@ -8,3 +8,13 @@ Resources:
       CodeUri: .
       Handler: app.handler
       Runtime: nodejs20.x
+
+  MyStateMachine:
+    Type: AWS::Serverless::StateMachine
+    Properties:
+      DefinitionUri: statemachine/statemachine.asl.yaml
+      DefinitionSubstitutions:
+        MyFunctionArn: !GetAtt MyFunction.Arn
+      Policies:
+        - LambdaInvokePolicy:
+            FunctionName: !Ref MyFunction
