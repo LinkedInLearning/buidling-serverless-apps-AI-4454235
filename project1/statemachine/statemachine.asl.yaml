@@ -10,7 +10,7 @@ States:
       TranscriptionJobName.$: $$.Execution.Name
       LanguageCode: en-US
       OutputBucketName: ${TranscriptionBucket}
-      OutputKey.$: States.Format('{}.txt', $.detail.object.key)
+      OutputKey.$: States.Format('transcribed/{}.txt', $.detail.object.key)
     Next: Wait For Transcribe
 
   Wait For Transcribe:
@@ -30,11 +30,37 @@ States:
     Choices:
       - Variable: $.TranscriptionJob.TranscriptionJobStatus
         StringEquals: COMPLETED
-        Next: Succeed
+        Next: Get Transcribed File
       - Variable: $.TranscriptionJob.TranscriptionJobStatus
         StringEquals: FAILED
         Next: Failed
     Default: Wait For Transcribe
+
+  Get Transcribed File:
+    Type: Task
+    Next: Clean output
+    Parameters:
+      Bucket: ${TranscriptionBucket}
+      Key.$: States.Format('transcribed/{}', States.ArrayGetItem(States.StringSplit($.TranscriptionJob.Transcript.TranscriptFileUri, '/'),4))
+    Resource: 'arn:aws:states:::aws-sdk:s3:getObject'
+    ResultSelector:
+      filecontent.$: States.StringToJson($.Body)
+    ResultPath: $.transcription
+
+  Clean output:
+    Type: Pass
+    Next: Translate Text
+    Parameters:
+      TranscriptedText.$: $.transcription.filecontent.results.transcripts[0].transcript
+
+  Translate Text:
+    Type: Task
+    Next: Succeed
+    Resource: 'arn:aws:states:::aws-sdk:translate:translateText'
+    Parameters:
+      SourceLanguageCode: en
+      TargetLanguageCode: es
+      Text.$: $.TranscriptedText
 
   Failed:
     Cause: Transcription Job failed

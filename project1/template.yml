@@ -30,6 +30,10 @@ Resources:
                 - transcribe:StartTranscriptionJob
                 - transcribe:GetTranscriptionJob
               Resource: '*'
+            - Effect: Allow
+              Action:
+                - translate:TranslateText
+              Resource: '*'
 
 Outputs:
   InputBucketName:
