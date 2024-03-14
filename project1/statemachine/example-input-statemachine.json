@@ -1,0 +1,10 @@
+{
+	"detail": {
+		"bucket": {
+			"name": "<bucketName>"
+		},
+		"object": {
+			"key": "<fileName>"
+		}
+	}
+}

@@ -1,20 +1,45 @@
 Comment: A description of my state machine
-StartAt: Lambda Invoke
+StartAt: Transcribe Text
 States:
-  Lambda Invoke:
+  Transcribe Text:
     Type: Task
-    Resource: arn:aws:states:::lambda:invoke
-    OutputPath: $.Payload
+    Resource: arn:aws:states:::aws-sdk:transcribe:startTranscriptionJob
     Parameters:
-      Payload.$: $
-      FunctionName: ${MyFunctionArn}
-    Retry:
-      - ErrorEquals:
-          - Lambda.ServiceException
-          - Lambda.AWSLambdaException
-          - Lambda.SdkClientException
-          - Lambda.TooManyRequestsException
-        IntervalSeconds: 1
-        MaxAttempts: 3
-        BackoffRate: 2
-    End: true
+      Media:
+        MediaFileUri.$: States.Format('s3://{}/{}', $.detail.bucket.name, $.detail.object.key)
+      TranscriptionJobName.$: $$.Execution.Name
+      LanguageCode: en-US
+      OutputBucketName: ${TranscriptionBucket}
+      OutputKey.$: States.Format('{}.txt', $.detail.object.key)
+    Next: Wait For Transcribe
+
+  Wait For Transcribe:
+    Next: Check Transcription Job Status
+    Seconds: 60
+    Type: Wait
+
+  Check Transcription Job Status:
+    Type: Task
+    Next: Transcription Job Status Successful
+    Parameters:
+      TranscriptionJobName.$: $$.Execution.Name
+    Resource: 'arn:aws:states:::aws-sdk:transcribe:getTranscriptionJob'
+
+  Transcription Job Status Successful:
+    Type: Choice
+    Choices:
+      - Variable: $.TranscriptionJob.TranscriptionJobStatus
+        StringEquals: COMPLETED
+        Next: Succeed
+      - Variable: $.TranscriptionJob.TranscriptionJobStatus
+        StringEquals: FAILED
+        Next: Failed
+    Default: Wait For Transcribe
+
+  Failed:
+    Cause: Transcription Job failed
+    Error: FAILED
+    Type: Fail
+
+  Succeed:
+    Type: Succeed

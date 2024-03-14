@@ -1,20 +1,37 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 
+Parameters:
+  InputBucketName:
+    Type: String
+    Default: ''
+
 Resources:
-  MyFunction:
-    Type: AWS::Serverless::Function
+  InputBucket:
+    Type: 'AWS::S3::Bucket'
     Properties:
-      CodeUri: .
-      Handler: app.handler
-      Runtime: nodejs20.x
+      BucketName: !Ref InputBucketName
 
   MyStateMachine:
     Type: AWS::Serverless::StateMachine
     Properties:
       DefinitionUri: statemachine/statemachine.asl.yaml
       DefinitionSubstitutions:
-        MyFunctionArn: !GetAtt MyFunction.Arn
+        TranscriptionBucket: !Ref InputBucket
       Policies:
-        - LambdaInvokePolicy:
-            FunctionName: !Ref MyFunction
+        - S3ReadPolicy:
+            BucketName: !Ref InputBucket
+        - S3WritePolicy:
+            BucketName: !Ref InputBucket
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - transcribe:StartTranscriptionJob
+                - transcribe:GetTranscriptionJob
+              Resource: '*'
+
+Outputs:
+  InputBucketName:
+    Description: 'Input bucket name'
+    Value: !Ref InputBucket
