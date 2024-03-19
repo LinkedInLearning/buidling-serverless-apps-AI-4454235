@@ -34,6 +34,9 @@ Resources:
               Action:
                 - translate:TranslateText
               Resource: '*'
+            - Effect: Allow
+              Action: 'bedrock:*'
+              Resource: '*'
 
 Outputs:
   InputBucketName:
