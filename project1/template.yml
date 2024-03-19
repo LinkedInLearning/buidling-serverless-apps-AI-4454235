@@ -5,6 +5,9 @@ Parameters:
   InputBucketName:
     Type: String
     Default: ''
+  Email:
+    Type: String
+    Default: ''
 
 Resources:
   InputBucket:
@@ -15,17 +18,27 @@ Resources:
         EventBridgeConfiguration:
           EventBridgeEnabled: true
 
+  NotificationTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      Subscription:
+        - Endpoint: !Ref Email
+          Protocol: email
+
   MyStateMachine:
     Type: AWS::Serverless::StateMachine
     Properties:
       DefinitionUri: statemachine/statemachine.asl.yaml
       DefinitionSubstitutions:
         TranscriptionBucket: !Ref InputBucket
+        NotificationTopic: !Ref NotificationTopic
       Policies:
         - S3ReadPolicy:
             BucketName: !Ref InputBucket
         - S3WritePolicy:
             BucketName: !Ref InputBucket
+        - SNSPublishMessagePolicy:
+            TopicName: !GetAtt NotificationTopic.TopicName
         - Version: '2012-10-17'
           Statement:
             - Effect: Allow

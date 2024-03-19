@@ -151,6 +151,15 @@ States:
               Accept: 'application/json'
             InputPath: $
             ResultPath: $.result
+            Next: 'Send Email Notification'
+
+          Send Email Notification:
+            Type: Task
+            Resource: 'arn:aws:states:::sns:publish'
+            Parameters:
+              TopicArn: ${NotificationTopic}
+              Message:
+                message: 'New poem has been created, check the S3 bucket for more info.'
             End: True
 
   Failed:
