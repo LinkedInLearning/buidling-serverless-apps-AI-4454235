@@ -10,7 +10,7 @@ States:
       TranscriptionJobName.$: $$.Execution.Name
       LanguageCode: en-US
       OutputBucketName: ${TranscriptionBucket}
-      OutputKey.$: States.Format('transcribed/{}.txt', $.detail.object.key)
+      OutputKey.$: States.Format('transcribed/{}.txt', States.ArrayGetItem(States.StringSplit($.detail.object.key, '/'),1))
     Next: Wait For Transcribe
 
   Wait For Transcribe:

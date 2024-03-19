@@ -11,6 +11,9 @@ Resources:
     Type: 'AWS::S3::Bucket'
     Properties:
       BucketName: !Ref InputBucketName
+      NotificationConfiguration:
+        EventBridgeConfiguration:
+          EventBridgeEnabled: true
 
   MyStateMachine:
     Type: AWS::Serverless::StateMachine
@@ -37,6 +40,22 @@ Resources:
             - Effect: Allow
               Action: 'bedrock:*'
               Resource: '*'
+      Events:
+        S3MediaTrigger:
+          Type: EventBridgeRule
+          Properties:
+            EventBusName: default
+            Pattern:
+              source:
+                - aws.s3
+              detail-type:
+                - Object Created
+              detail:
+                bucket:
+                  name:
+                    - !Ref InputBucket
+                object:
+                  key: [{ prefix: 'uploaded/' }]
 
 Outputs:
   InputBucketName:
