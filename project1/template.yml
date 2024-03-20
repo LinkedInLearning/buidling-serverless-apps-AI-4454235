@@ -39,6 +39,8 @@ Resources:
             BucketName: !Ref InputBucket
         - SNSPublishMessagePolicy:
             TopicName: !GetAtt NotificationTopic.TopicName
+        - EventBridgePutEventsPolicy:
+            EventBusName: default
         - Version: '2012-10-17'
           Statement:
             - Effect: Allow

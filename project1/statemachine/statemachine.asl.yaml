@@ -109,7 +109,19 @@ States:
               Accept: 'application/json'
             InputPath: $
             ResultPath: $.result
-            End: true
+            Next: 'EventBridge Put Events'
+
+          EventBridge Put Events:
+            Type: 'Task'
+            Resource: 'arn:aws:states:::events:putEvents'
+            Parameters:
+              Entries:
+                - Detail:
+                    Message.$: States.Format('https://s3.us-west-2.amazonaws.com/${TranscriptionBucket}/results/{}-result.json', $.FileName)
+                  DetailType.$: $$.Execution.Name
+                  EventBusName: 'default'
+                  Source: 'StateMachinePutEvent'
+            End: True
 
       - StartAt: Add create poem prompt to the output
         States:
