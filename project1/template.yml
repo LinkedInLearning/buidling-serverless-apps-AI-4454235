@@ -70,6 +70,65 @@ Resources:
                 object:
                   key: [{ prefix: 'uploaded/' }]
 
+  TestingRule:
+    Type: 'AWS::Events::Rule'
+    Properties:
+      EventPattern:
+        source:
+          - 'StateMachinePutEvent'
+      Targets:
+        - Arn: !GetAtt TestingLogGroup.Arn
+          Id: 'TestingRule'
+
+  TestingLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: 'SummaryLogGroup'
+
+  TestingLogGroupPolicy:
+    Type: AWS::Logs::ResourcePolicy
+    Properties:
+      PolicyName: EventBridgeToCWLogsPolicy
+      PolicyDocument: !Sub >
+        {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "EventBridgetoCWLogsCreateLogStreamPolicy",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": [
+                  "events.amazonaws.com"
+                ]
+              },
+              "Action": [
+                "logs:CreateLogStream"
+              ],
+              "Resource": [
+                "${TestingLogGroup.Arn}"
+              ]
+            },
+            {
+              "Sid": "EventBridgetoCWLogsPutLogEventsPolicy",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": [
+                  "events.amazonaws.com"
+                ]
+              },
+              "Action": [
+                "logs:PutLogEvents"
+              ],
+              "Resource": [
+                "${TestingLogGroup.Arn}"
+              ],
+              "Condition": {
+                "ArnEquals": {"AWS:SourceArn": "${TestingRule.Arn}"}
+              }
+            }
+          ]
+        }
+
 Outputs:
   InputBucketName:
     Description: 'Input bucket name'
