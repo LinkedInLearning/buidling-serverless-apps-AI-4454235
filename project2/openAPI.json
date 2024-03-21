@@ -48,6 +48,82 @@
 					}
 				}
 			}
+		},
+
+		"/weather5days": {
+			"get": {
+				"description": "Gets the weather for the next 5 days for a specific latitude and longitude that represents a city.",
+				"parameters": [
+					{
+						"name": "latitude",
+						"in": "query",
+						"description": "Latitude of the city in where to get the weather forecast",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"name": "longitude",
+						"in": "query",
+						"description": "Longitude of the city in where to get the weather forecast",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Weather forecast array for the next five days for the given city.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"properties": {
+										"date": {
+											"type": "string",
+											"description": "date for the forecast"
+										},
+										"temp_min": {
+											"type": "string",
+											"description": "minimun temperature for the forecast"
+										},
+										"temp_max": {
+											"type": "string",
+											"description": "maximun temperature for the forecast"
+										},
+										"season_min": {
+											"type": "string",
+											"description": "minimun temperature for the season"
+										},
+										"season_max": {
+											"type": "string",
+											"description": "maximun temperature for the season"
+										},
+										"condition_name": {
+											"type": "string",
+											"description": "weather condition name"
+										},
+										"condition_desc": {
+											"type": "string",
+											"description": "weather condition description"
+										},
+										"condition_video": {
+											"type": "string",
+											"description": "weather condition video url"
+										},
+										"condition_icon": {
+											"type": "string",
+											"description": "weather condition icon url"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }

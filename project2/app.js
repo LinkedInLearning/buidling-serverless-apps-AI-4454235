@@ -15,6 +15,14 @@ exports.handler = async (event) => {
 
 		response = weatherInfoToday;
 	}
+	if (apiPath === '/weather5days') {
+		const lat = event.parameters[0].value;
+		const long = event.parameters[1].value;
+
+		const weatherInfoFiveDays = await getWeather(lat, long, 5);
+
+		response = weatherInfoFiveDays;
+	}
 
 	let result = {
 		messageVersion: '1.0',
@@ -42,7 +50,7 @@ async function getWeather(lat, long, days) {
 	console.log(url);
 
 	return axios.get(url).then((response) => {
-		const forecast = response.data[0].forecast[days - 1]; //for the number of days you want the result.
+		const forecast = response.data[0].forecast.slice(0, days); //for the number of days you want the result.
 		console.log(forecast);
 		return forecast;
 	});
