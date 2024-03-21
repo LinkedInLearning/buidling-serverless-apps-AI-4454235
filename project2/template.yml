@@ -5,6 +5,9 @@ Parameters:
   AgentBucketName:
     Type: String
     Default: ''
+  AgentARN:
+    Type: String
+    Default: ''
 
 Resources:
   AgentBucket:
@@ -18,3 +21,12 @@ Resources:
       CodeUri: .
       Handler: app.handler
       Runtime: nodejs20.x
+
+  GetWeatherFunctionPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !GetAtt GetWeatherFunction.Arn
+      Principal: bedrock.amazonaws.com
+      SourceAccount: !Ref 'AWS::AccountId'
+      SourceArn: !Ref AgentARN
