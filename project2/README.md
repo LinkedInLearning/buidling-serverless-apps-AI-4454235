@@ -64,4 +64,52 @@ http://explorecalifornia.org/api/weather.php?city=mia&qty=3
       ...
     ]
 },
+  {
+    "id": "3774",
+    "name": "Miandrivazo",
+    "name_ascii": "Miandrivazo",
+    "lat": "-19.51618732",
+    "lng": "45.46661983",
+    "population": "11894",
+    "country_id": "117",
+    "province": "Toliary",
+    "country_name": "Madagascar",
+    "unit": "F",
+    "season": "fall",
+    "forecast":
+      ...
+  },
+  {
+    "id": "3981",
+    "name": "Miahuatlan",
+    "name_ascii": "Miahuatlan",
+    "lat": "16.32999676",
+    "lng": "-96.60000574",
+    "population": "16662",
+    "country_id": "124",
+    "province": "Oaxaca",
+    "country_name": "Mexico",
+    "unit": "F",
+    "season": "spring",
+    "forecast":
+      ...
+  },
+]
+```
+Get weather for the city closest to the coordinates 40.0, -105.0, limiting to 1 result
+http://explorecalifornia.org/api/weather/lat/40/lng/-105/qty/1
+or
+http://explorecalifornia.org/api/weather.php?lat=40&lng=-105&qty=1
+
+```
+code here
+```
+
+Get weather for 2 cities within 130 miles from the coordinates 40.0, -105.0
+http://explorecalifornia.org/api/weather/lat/40/lng/-105/radius/130/qty/2
+or
+http://explorecalifornia.org/api/weather.php?lat=40&lng=-105&radius=130&qty=2
+
+```
+code here
 ```
