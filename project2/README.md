@@ -102,7 +102,121 @@ or
 http://explorecalifornia.org/api/weather.php?lat=40&lng=-105&qty=1
 
 ```
-code here
+[
+  {
+    "id": "6487",
+    "name": "Boulder",
+    "name_ascii": "Boulder",
+    "lat": "40.03844627",
+    "lng": "-105.246093",
+    "population": "106898",
+    "country_id": "206",
+    "province": "Colorado",
+    "country_name": "United States of America", "distance": "13.29067934194029",
+    "unit": "F",
+    "season": "winter",
+    "forecast": [
+      {
+      "date": "03\/13\/2017",
+      "temp_min": 10.81,
+      "temp_max": 15.31,
+      "season_min": 8.5,
+      "season_max": 20,
+      "condition_name": "storm", "condition_desc": "Watch out for storms!", "condition_video":
+      "http:\/\/explorecalifornia.org\/api_media\/storm_190935.mov", "condition_icon":
+      "http:\/\/explorecalifornia.org\/api_media\/storm_16240.png" },
+      {
+      "date": "03\/14\/2017",
+      "temp_min": 12.72,
+      "temp_max": 17.06,
+      "season_min": 8.5,
+      "season_max": 20,
+      "condition_name": "storm", "condition_desc": "Watch out for storms!", "condition_video":
+      "http:\/\/explorecalifornia.org\/api_media\/storm_190935.mov", "condition_icon":
+      "http:\/\/explorecalifornia.org\/api_media\/storm_16240.png" },
+      {
+      "date": "03\/15\/2017",
+      "temp_min": 9.03,
+      "temp_max": 11.34,
+      "season_min": 8.5,
+      "season_max": 20,
+      "condition_name": "snow", "condition_desc": "It will snow!", "condition_video":
+      "http:\/\/explorecalifornia.org\/api_media\/snow_1033097.mov", "condition_icon":
+      "http:\/\/explorecalifornia.org\/api_media\/snow_16240.png" },
+      {
+      "date": "03\/16\/2017",
+      "temp_min": 10.02,
+      "temp_max": 11.4,
+      "season_min": 8.5,
+      "season_max": 20,
+      "condition_name": "condition_desc": "condition_video":
+      "http:\/\/explorecalifornia.org\/api_media\/snow_1033097.mov", "condition_icon":
+      "http:\/\/explorecalifornia.org\/api_media\/snow_16240.png" },
+      {
+      "date": "03\/17\/2017",
+      "temp_min": 10.16,
+      "temp_max": 18.23,
+      "season_min": 8.5,
+      "season_max": 20,
+      "condition_name": "condition_desc": "condition_video":
+      "http:\/\/explorecalifornia.org\/api_media\/cloudy_4281614.mov", "condition_icon":
+      "http:\/\/explorecalifornia.org\/api_media\/cloudy_16240.png" },
+      {
+      "date": "03\/18\/2017",
+      "temp_min": 8.62,
+      "temp_max": 8.77,
+      "season_min": 8.5,
+      "season_max": 20,
+      "condition_name": "snow", "condition_desc": "It will snow!", "condition_video":
+      "http:\/\/explorecalifornia.org\/api_media\/snow_1033097.mov", "condition_icon":
+      "http:\/\/explorecalifornia.org\/api_media\/snow_16240.png" },
+      {
+      "date": "03\/19\/2017",
+      "temp_min": 10.06,
+      "temp_max": 14.21,
+      "season_min": 8.5,
+      "season_max": 20,
+      "condition_name": "condition_desc": "condition_video":
+      "http:\/\/explorecalifornia.org\/api_media\/cloudy_4281614.mov", "condition_icon":
+      "http:\/\/explorecalifornia.org\/api_media\/cloudy_16240.png" },
+      {
+      "date": "03\/20\/2017",
+      "temp_min": 13.9,
+      "temp_max": 16.59,
+      "season_min": 8.5,
+      "season_max": 20,
+      "condition_name": "condition_desc": "condition_video":
+      "http:\/\/explorecalifornia.org\/api_media\/snow_1033097.mov", "condition_icon":
+      "http:\/\/explorecalifornia.org\/api_media\/snow_16240.png" },
+      {
+      "date": "03\/21\/2017",
+      "temp_min": 13.96,
+      "temp_max": 16.07,
+      "season_min": 8.5,
+      "season_max": 20,
+      "condition_name": "cloudy", "condition_desc": "Partially cloudy day", "condition_icon":
+      "condition_video": "http:\/\/explorecalifornia.org\/api_media\/cloudy_4281614.mov",
+      "condition_icon": "http:\/\/explorecalifornia.org\/api_media\/cloudy_16240.png" },
+      {
+      "date": "03\/22\/2017",
+      "temp_min": 11.41,
+      "temp_max": 17.29,
+      "season_min": 8.5,
+      "season_max": 20, "condition_name": "snow", "condition_desc": "It will snow!", "condition_video":
+      "http:\/\/explorecalifornia.org\/api_media\/snow_1033097.mov", "condition_icon":
+      "http:\/\/explorecalifornia.org\/api_media\/snow_16240.png" },
+      {
+      "date": "03\/23\/2017",
+      "temp_min": 10.71,
+      "temp_max": 14.07,
+      "season_min": 8.5,
+      "season_max": 20,
+      "condition_name": "snow", "condition_desc": "It will snow!", "condition_video":
+      "http:\/\/explorecalifornia.org\/api_media\/snow_1033097.mov", "condition_icon":
+      "http:\/\/explorecalifornia.org\/api_media\/snow_16240.png" }
+    ]
+  }
+]
 ```
 
 Get weather for 2 cities within 130 miles from the coordinates 40.0, -105.0
