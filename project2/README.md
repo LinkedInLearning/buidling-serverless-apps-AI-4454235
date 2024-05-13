@@ -49,5 +49,19 @@ http://explorecalifornia.org/api/weather.php?city=mia&qty=3
         "condition_name": "sun",
         "condition_desc": "Blue skies all day long!", "condition_video":
         "http://explorecalifornia.org/api/media/sun_45448.mp4", "condition_icon":
-        "http://explorecalifornia.org/api/media/sun_16240.png" },
+        "http://explorecalifornia.org/api/media/sun_16240.png"
+      },
+      {
+        "date": "04/15/2017",
+        "temp_min": 59.882,
+        "temp_max": 70.952,
+        "season_min": 57.65,
+        "season_max": 78.35,
+        "condition_name": "storm", "condition_desc": "Watch out for storms!", "condition_video":
+        "http://explorecalifornia.org/api/media/storm_190935.mp4", "condition_icon":
+        "http://explorecalifornia.org/api/media/storm_16240.png"
+      },
+      ...
+    ]
+},
 ```
