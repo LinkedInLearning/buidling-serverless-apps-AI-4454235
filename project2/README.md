@@ -4,7 +4,7 @@
 This API will give you a fake 5 day weather forecast for over 7000 cities around the world. You can search by city or coordinates.
 
 ## WEATHER - Base URL
-[http://explorecalifornia.org/api/weather/] (http://explorecalifornia.org/api/weather/)
+http://explorecalifornia.org/api/weather/
 
 Notes:
 - You must provide parameters for the API to work. An ‘empty’ call with throw a warning.
@@ -22,13 +22,32 @@ temperature for a given city and given time of the year.
 | unit | F for Fahrenheit (default) C for Celcius |
 
 ## Example Usage & Results
-Get weather for a city which name contains “mia”, limiting results to 3 towns [http://explorecalifornia.org/api/weather/city/mia/qty/3](http://explorecalifornia.org/api/weather/city/mia/qty/3) or
-[http://explorecalifornia.org/api/weather.php?city=mia&qty=3](http://explorecalifornia.org/api/weather.php?city=mia&qty=3)
-
+Get weather for a city which name contains “mia”, limiting results to 3 towns http://explorecalifornia.org/api/weather/city/mia/qty/3 or
+http://explorecalifornia.org/api/weather.php?city=mia&qty=3
 ```
 [
-{
-"id": "2015",
-"name": "Mianyang", "name_ascii": "Mianyang", "lat": "31.46997703", "lng": "104.7699768", "population": "830068", "country_id": "40", "province": "Sichuan", "country_name": "China", "unit": "F",
-"season": "spring", "forecast": [
+  {
+    "id": "2015",
+    "name": "Mianyang",
+    "name_ascii": "Mianyang",
+    "lat": "31.46997703",
+    "lng": "104.7699768",
+    "population": "830068",
+    "country_id": "40",
+    "province": "Sichuan",
+    "country_name":
+    "China",
+    "unit": "F",
+    "season": "spring",
+    "forecast": [
+      {
+        "date": "04/14/2017",
+        "temp_min": 58.442,
+        "temp_max": 58.514,
+        "season_min": 57.65,
+        "season_max": 78.35,
+        "condition_name": "sun",
+        "condition_desc": "Blue skies all day long!", "condition_video":
+        "http://explorecalifornia.org/api/media/sun_45448.mp4", "condition_icon":
+        "http://explorecalifornia.org/api/media/sun_16240.png" },
 ```
